@@ -17,7 +17,7 @@ module View = {
         };
 };
 
-module Text = {
+ module Text = {
   type ellipsizeModeT = [
     | `head
     | `middle
@@ -31,7 +31,7 @@ module Text = {
       ellipsizeMode::(ellipsizeMode:option ellipsizeModeT)=?
       numberOfLines::(numberOfLines:option int)=? =>
     ReactRe.wrapPropsShamelessly
-    text
+      text
       {
         "accessible": Js.Undefined.from_opt (optionMap to_js_boolean accessible),
         "allowFontScaling": Js.Undefined.from_opt (optionMap to_js_boolean allowFontScaling),
@@ -42,7 +42,7 @@ module Text = {
           | `clip => "clip") ellipsizeMode),
         "numberOfLines": Js.Undefined.from_opt numberOfLines
       };
-}; */
+};
 
 module Button = {
   external button : ReactRe.reactClass = "Button" [@@bs.module "react-native"];
@@ -63,10 +63,7 @@ module Button = {
       }
 };
 
-module ActionSheetIOS = {
-  type actionSheetOptions = Js.t {. options: array string, cancelButtonIndex: int, descructiveButtonIndex: int, title: string, message: string };
-  external showActionSheetWithOptions : actionSheetOptions -> (int -> unit) -> unit = "ActionSheetIOS.showActionSheetWithOptions" [@bs.val]
-};
+
 
 module Dimensions = {
   type dim = Js.t {. width: float, height: float, scale: float, fontScale: float };
@@ -76,7 +73,7 @@ module Dimensions = {
     | `screen ] [@bs.string] => dim = "get" [@@bs.module "Dimensions"];
 };
 
-module Keyboard = {
+ module Keyboard = {
   type event = Js.t {.
     endCoordinates: Js.t {.
       width: float,
@@ -111,4 +108,3 @@ module Keyboard = {
   ] [@bs.string]) => unit = "removeAllListeners" [@@bs.module "Keyboard"];
   external dismiss: unit => unit = "dismiss" [@@bs.module "Keyboard"];
 };
-
