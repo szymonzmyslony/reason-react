@@ -17,6 +17,37 @@ module View = {
         };
 };
 
+module StyleSheet = {
+  type t;
+  external t : t = "StyleSheet" [@@bs.module "react-native"];
+  external _create: t => Js.t 'a => Js.t 'a =
+    "create" [@@bs.send];
+  let create : Js.t 'a => Js.t 'a = fun a => _create t a;
+
+  external _hairlineWidth: t => int = "hairlineWidth" [@@bs.get];
+  let hairlineWidth = _hairlineWidth t;
+
+  /* external _absoluteFill: t => style = "absoluteFill" [@@bs.get];
+  let absoluteFill = _absoluteFill t;
+
+  external _absoluteFillObject: t => style = "absoluteFillObject" [@@bs.get];
+  let absoluteFillObject = _absoluteFillObject t; */
+};
+
+
+module TextInput = {
+    external text_input : ReactRe.reactClass = "TextInput" [@@bs.module "react-native"];
+    let createElement
+    /* style::(style: option style)=?, */
+        autoCorrect::(accessible:option bool)=? =>
+      ReactRe.wrapPropsShamelessly
+        text_input
+        {
+          /* "style": Js.Undefined.from_opt style, */
+          "autoCorrect": Js.Undefined.from_opt (optionMap to_js_boolean accessible)
+        };
+};
+
 module Text = {
   type ellipsizeModeT = [
     | `head
